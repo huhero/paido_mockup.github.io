@@ -17,7 +17,7 @@ interface Course {
 }
 
 const CourseDetail: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, useSearchParamsHook] = useSearchParams();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Datos base
@@ -58,7 +58,7 @@ const CourseDetail: React.FC = () => {
       setSelectedFilters(prev => ({ ...prev, center: [centerParam] }));
       const newParams = new URLSearchParams(searchParams);
       newParams.delete('center');
-      setSearchParams(newParams, { replace: true });
+      useSearchParamsHook(newParams, { replace: true });
     }
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -231,12 +231,12 @@ const CourseDetail: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
             {paginatedCourses.map((course) => (
               <div key={course.id} className="group border-2 md:border-4 border-retro-black bg-white shadow-retro-sm md:shadow-retro flex flex-row md:flex-col overflow-hidden h-[100px] md:h-auto">
-                <div className="w-[100px] md:w-full md:aspect-[16/10] border-r-2 md:border-r-0 md:border-b-4 border-retro-black relative shrink-0">
-                  <img src={course.img} alt={course.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0" />
+                <Link to={`/course/${course.id}`} className="w-[100px] md:w-full md:aspect-[16/10] border-r-2 md:border-r-0 md:border-b-4 border-retro-black relative shrink-0 block overflow-hidden">
+                  <img src={course.img} alt={course.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                   <div className="hidden md:block absolute top-0 right-0 bg-retro-black text-white px-2 py-0.5 text-[8px] font-black uppercase border-l-2 border-b-2 border-retro-black z-10">
                     {course.tag}
                   </div>
-                </div>
+                </Link>
 
                 <div className="p-2 md:p-6 flex flex-col flex-1 justify-between min-w-0">
                   <div>
@@ -244,16 +244,18 @@ const CourseDetail: React.FC = () => {
                       <span className="md:hidden text-[7px] font-black uppercase text-retro-black bg-yellow-400 px-1 border border-retro-black">{course.tag}</span>
                       <span className="bg-paido-offwhite border border-retro-black px-1 text-[6px] md:text-[8px] font-black uppercase">{course.level}</span>
                     </div>
-                    <h3 className="text-xs md:text-xl font-display font-black uppercase leading-tight truncate md:whitespace-normal group-hover:underline">
-                      {course.title}
-                    </h3>
+                    <Link to={`/course/${course.id}`} className="block">
+                      <h3 className="text-xs md:text-xl font-display font-black uppercase leading-tight truncate md:whitespace-normal group-hover:underline">
+                        {course.title}
+                      </h3>
+                    </Link>
                     <p className="text-[8px] font-black text-gray-400 uppercase md:hidden mt-0.5">{course.instructor} // {course.center}</p>
                   </div>
                   
                   <div className="flex items-center justify-between mt-auto">
                     <span className="text-sm md:text-2xl font-display font-black italic">{course.price}</span>
                     <Link 
-                      to={`/enroll/${course.id}`}
+                      to={`/course/${course.id}`}
                       className="bg-retro-black text-white px-3 md:px-6 py-1 md:py-3 text-[8px] md:text-[10px] font-black uppercase border-2 border-retro-black flex items-center gap-1 active:translate-y-0.5 transition-all"
                     >
                       <span className="hidden xs:inline">DETALLES</span> <span className="material-symbols-outlined text-[12px] md:text-xs">arrow_forward</span>

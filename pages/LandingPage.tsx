@@ -16,35 +16,43 @@ const LandingPage: React.FC = () => {
 
   const topCourses = [
     { 
-      title: "Servicio de Potencia y Precisión Pro", 
+      id: 1,
+      title: "Servicio de Potencia Pro", 
       instructor: "Andrés M. Sampras", 
       tag: "TENIS", 
       price: "$180.000", 
-      duration: "6 SEMANAS", 
+      duration: "6 SEM",
+      level: "PRO",
       img: "https://images.unsplash.com/photo-1595435066319-4051d3828223?q=80&w=600&h=400&auto=format&fit=crop" 
     },
     { 
-      title: "Táctica y Visión de Juego Moderna", 
+      id: 2,
+      title: "Táctica y Visión Moderna", 
       instructor: "Pro. Julián Álvarez", 
       tag: "FÚTBOL", 
       price: "$125.000", 
-      duration: "8 SEMANAS", 
+      duration: "8 SEM", 
+      level: "INT",
       img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=600&h=400&auto=format&fit=crop" 
     },
     { 
-      title: "Mecánica de Tiro y Salto Vertical", 
+      id: 3,
+      title: "Mecánica de Tiro y Salto", 
       instructor: "Coach Kevin Durant", 
-      tag: "BASQUETBALL", 
+      tag: "BASQUET", 
       price: "$140.000", 
-      duration: "5 SEMANAS", 
+      duration: "5 SEM", 
+      level: "PRO",
       img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=600&h=400&auto=format&fit=crop" 
     },
     { 
-      title: "Sprint: Técnica de Salida y Explosión", 
+      id: 4,
+      title: "Sprint: Técnica de Salida", 
       instructor: "Usain B. Elite", 
-      tag: "ATLETISMO", 
+      tag: "TRACK", 
       price: "$90.000", 
-      duration: "4 SEMANAS", 
+      duration: "4 SEM", 
+      level: "BEG",
       img: "https://images.unsplash.com/photo-1461896756913-647f00716c02?q=80&w=600&h=400&auto=format&fit=crop" 
     }
   ];
@@ -86,11 +94,6 @@ const LandingPage: React.FC = () => {
         {/* Elementos Decorativos Responsivos */}
         <div className="absolute top-[10%] right-[-10%] md:right-[-5%] size-[250px] md:size-[500px] border-4 border-retro-black rounded-full opacity-5 halftone pointer-events-none"></div>
         <div className="absolute bottom-[-10%] left-[-5%] size-[200px] md:size-[400px] bg-retro-black opacity-5 halftone pointer-events-none"></div>
-        
-        {/* Marca de agua lateral solo en desktop */}
-        <div className="hidden lg:block absolute right-10 bottom-10 rotate-90 origin-right text-[10px] font-black tracking-[1em] opacity-20 uppercase">
-          performance_tracking_v2.5
-        </div>
       </section>
 
       {/* Carrusel de Logos de Escuelas */}
@@ -120,69 +123,77 @@ const LandingPage: React.FC = () => {
         `}</style>
       </div>
 
-      {/* Sección de Listado de Cursos */}
-      <section className="py-12 md:py-20 bg-retro-gray border-b-4 border-retro-black">
+      {/* Sección de Listado de Cursos - Rediseñada */}
+      <section className="py-12 md:py-24 bg-paido-offwhite border-b-4 border-retro-black">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-8 text-center md:text-left">
-            <div className="relative">
-              <div className="md:absolute -top-6 -left-2 text-[10px] font-black bg-retro-black text-white px-2 py-0.5 tracking-tighter mb-4 md:mb-0 inline-block">ELITE_CATALOGUE_2024</div>
-              <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black uppercase tracking-tighter leading-none">CURSOS DISPONIBLES</h2>
-              <p className="text-[10px] md:text-sm font-black uppercase mt-4 text-gray-500 flex items-center justify-center md:justify-start gap-2 tracking-widest">
-                <span className="size-2 bg-retro-black animate-pulse"></span>
-                Inicia tu camino a la excelencia deportiva
-              </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-10">
+            <div className="max-w-2xl">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 mb-2 italic">CATÁLOGO_ACTIVO_V2.5</p>
+              <h2 className="text-4xl md:text-6xl font-display font-black uppercase tracking-tighter leading-[0.85]">
+                RENDIMIENTO<br/><span className="italic underline decoration-8">SIN EXCUSAS</span>
+              </h2>
             </div>
             
-            <Link to="/course" className="group relative w-full sm:w-fit mx-auto md:mx-0">
-               <div className="absolute inset-0 bg-retro-black translate-x-1 translate-y-1 sm:translate-x-2 sm:translate-y-2 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></div>
-               <div className="relative border-4 border-retro-black bg-white px-4 sm:px-8 py-3 sm:py-4 font-black uppercase text-xs sm:text-sm md:text-base transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 flex items-center justify-center gap-3">
-                 VER TODOS LOS CURSOS <span className="material-symbols-outlined">apps</span>
+            <Link to="/course" className="group relative w-full sm:w-fit">
+               <div className="absolute inset-0 bg-retro-black translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform"></div>
+               <div className="relative border-4 border-retro-black bg-white px-10 py-5 font-black uppercase text-sm flex items-center justify-center gap-3 group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform">
+                 CATÁLOGO COMPLETO <span className="material-symbols-outlined">apps</span>
                </div>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {topCourses.map((course, i) => (
-              <div key={i} className="group border-2 md:border-4 border-retro-black bg-white shadow-retro-sm md:shadow-retro hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex flex-row md:flex-col overflow-hidden h-[120px] md:h-auto">
-                {/* Imagen Lateral en Móvil, Superior en Desktop */}
-                <div className="w-[100px] xs:w-[130px] md:w-full md:aspect-[4/3] border-r-2 md:border-r-0 md:border-b-4 border-retro-black relative overflow-hidden grayscale group-hover:grayscale-0 transition-all shrink-0">
-                  <img src={course.img} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute top-0 right-0 bg-retro-black text-white px-1.5 md:px-3 py-0.5 md:py-1 text-[7px] md:text-[10px] font-black uppercase border-l-2 md:border-l-4 border-b-2 md:border-b-4 border-retro-black z-10">
-                    {course.tag}
-                  </div>
+              <div key={i} className="group border-4 border-retro-black bg-white shadow-retro hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all flex flex-col relative overflow-hidden">
+                {/* Header de la tarjeta */}
+                <div className="flex items-center justify-between px-4 py-2 bg-retro-black text-white">
+                  <span className="text-[8px] font-black uppercase tracking-widest">PAIDO_REF_00{course.id}</span>
+                  <span className="material-symbols-outlined text-xs">verified</span>
                 </div>
 
-                <div className="p-3 md:p-6 flex flex-col flex-1 justify-between">
-                  <div>
-                    <h3 className="text-[10px] xs:text-xs md:text-xl font-display font-black uppercase leading-[1.1] line-clamp-2 md:line-clamp-3 group-hover:underline">
+                {/* Imagen con Overlay */}
+                <Link to={`/course/${course.id}`} className="aspect-[4/3] border-b-4 border-retro-black relative overflow-hidden block">
+                  <img src={course.img} alt={course.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="bg-yellow-400 text-retro-black px-2 py-1 text-[10px] font-black uppercase border-2 border-retro-black">
+                      {course.tag}
+                    </span>
+                  </div>
+                </Link>
+
+                <div className="p-6 flex flex-col flex-1 relative bg-white">
+                  {/* Patrón Halftone Decorativo al Hover */}
+                  <div className="absolute inset-0 halftone opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none"></div>
+                  
+                  <div className="mb-6 relative z-10">
+                    <h3 className="text-xl font-display font-black uppercase leading-tight mb-2 group-hover:text-retro-black">
                       {course.title}
                     </h3>
+                    <p className="text-[10px] font-black uppercase text-gray-400">Por {course.instructor}</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 mb-8 relative z-10">
+                    <div className="border-2 border-retro-black p-2 flex flex-col items-center">
+                      <span className="material-symbols-outlined text-sm mb-1">schedule</span>
+                      <span className="text-[9px] font-black uppercase">{course.duration}</span>
+                    </div>
+                    <div className="border-2 border-retro-black p-2 flex flex-col items-center">
+                      <span className="material-symbols-outlined text-sm mb-1">military_tech</span>
+                      <span className="text-[9px] font-black uppercase">{course.level}</span>
+                    </div>
                   </div>
                   
-                  <div className="hidden md:flex flex-col gap-1 mb-6 border-l-4 border-retro-black pl-3 bg-paido-offwhite py-2">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Instructor Pro</p>
-                    <p className="text-xs font-bold uppercase truncate">{course.instructor}</p>
-                  </div>
-                  
-                  <div className="mt-auto">
-                    <div className="hidden md:flex items-center gap-2 text-[10px] font-black uppercase mb-6 bg-retro-gray w-fit px-2 py-1 border border-retro-black">
-                      <span className="material-symbols-outlined text-sm">timer</span>
-                      {course.duration}
+                  <div className="mt-auto border-t-4 border-retro-black pt-6 flex items-end justify-between relative z-10">
+                    <div>
+                      <p className="text-[8px] font-black uppercase text-gray-400 mb-1">Inversión_Pro</p>
+                      <span className="text-3xl font-display font-black italic tracking-tighter">{course.price}</span>
                     </div>
-                    
-                    <div className="flex items-center justify-between pt-1.5 md:pt-4 border-t md:border-t-4 border-retro-black">
-                      <div className="flex flex-col">
-                        <span className="hidden xs:block text-[6px] md:text-[8px] font-black uppercase text-gray-400">Inscripción</span>
-                        <span className="text-xs sm:text-sm md:text-2xl font-display font-black italic leading-none tracking-tighter">{course.price}</span>
-                      </div>
-                      <Link 
-                        to="/course" 
-                        className="size-7 sm:size-8 md:size-12 bg-retro-black text-white flex items-center justify-center border md:border-2 border-retro-black transition-all hover:bg-white hover:text-retro-black group-hover:rotate-12"
-                        title="Ver detalles"
-                      >
-                        <span className="material-symbols-outlined text-xs sm:text-sm md:text-base">arrow_outward</span>
-                      </Link>
-                    </div>
+                    <Link 
+                      to={`/course/${course.id}`}
+                      className="size-14 bg-retro-black text-white flex items-center justify-center hover:bg-yellow-400 hover:text-retro-black transition-all border-2 border-retro-black group/btn"
+                    >
+                      <span className="material-symbols-outlined text-2xl group-hover/btn:rotate-45 transition-transform">arrow_outward</span>
+                    </Link>
                   </div>
                 </div>
               </div>

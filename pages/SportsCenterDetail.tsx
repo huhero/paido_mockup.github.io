@@ -1,6 +1,19 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+
+interface Instructor {
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface SocialLinks {
+  instagram?: string;
+  twitter?: string;
+  facebook?: string;
+  tiktok?: string;
+}
 
 interface SportsCenter {
   id: number;
@@ -13,10 +26,16 @@ interface SportsCenter {
   tags: string[];
   description: string;
   facilities: string[];
+  instructors: Instructor[];
+  socials: SocialLinks;
 }
 
 const SportsCenterDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   // Mock de datos extendido para el detalle
   const centerData: Record<number, SportsCenter> = {
@@ -30,7 +49,17 @@ const SportsCenterDetail: React.FC = () => {
       image: "https://images.unsplash.com/photo-1595435066319-4051d3828223?q=80&w=1200&auto=format&fit=crop",
       tags: ["Tenis", "Piscina", "Sauna"],
       description: "Elite Tennis Club no es solo un centro de entrenamiento, es un santuario para el rendimiento deportivo de alto nivel. Fundado con la visión de profesionalizar el deporte recreativo en Bogotá, nuestras instalaciones combinan tecnología de punta con la tradición de los grandes clubes europeos.",
-      facilities: ["8 Canchas de polvo de ladrillo", "Piscina Olímpica climatizada", "Zona de recuperación criogénica", "Restaurante de nutrición deportiva"]
+      facilities: ["8 Canchas de polvo de ladrillo", "Piscina Olímpica climatizada", "Zona de recuperación criogénica", "Restaurante de nutrición deportiva"],
+      instructors: [
+        { name: "Andrés M. Sampras", role: "Maestro de Tenis", image: "https://picsum.photos/seed/coach1/300/300" },
+        { name: "Julián Álvarez", role: "Estratega de Fútbol", image: "https://picsum.photos/seed/coach2/300/300" }
+      ],
+      socials: {
+        instagram: "@elitetennis_bog",
+        twitter: "@elitetennis",
+        facebook: "elitetennisclub",
+        tiktok: "@elitetennis_pro"
+      }
     },
     2: {
       id: 2,
@@ -42,11 +71,21 @@ const SportsCenterDetail: React.FC = () => {
       image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop",
       tags: ["Crossfit", "Boxeo", "Fisioterapia"],
       description: "En Power House, la intensidad es nuestra moneda. Diseñado para atletas que buscan romper sus propios límites, ofrecemos un ecosistema integral donde el entrenamiento de fuerza, la técnica de combate y la recuperación muscular convergen en un solo lugar.",
-      facilities: ["Zona de Crossfit de 500m2", "Ring de boxeo profesional", "Sala de fisioterapia avanzada", "Café de especialidad y pre-entreno"]
+      facilities: ["Zona de Crossfit de 500m2", "Ring de boxeo profesional", "Sala de fisioterapia avanzada", "Café de especialidad y pre-entreno"],
+      instructors: [
+        { name: "Carlos Ramirez", role: "Coach de Crossfit", image: "https://picsum.photos/seed/coach3/300/300" },
+        { name: "Marta Pro", role: "Instructor de Pilates", image: "https://picsum.photos/seed/coach4/300/300" }
+      ],
+      socials: {
+        instagram: "@powerhouse_bog",
+        twitter: "@powerhouse_fit",
+        facebook: "powerhousebogota",
+        tiktok: "@powerhouse_clips"
+      }
     }
   };
 
-  const center = centerData[Number(id)] || centerData[1]; // Fallback al primero si no existe
+  const center = centerData[Number(id)] || centerData[1];
 
   return (
     <div className="bg-paido-offwhite font-mono text-retro-black min-h-screen">
@@ -138,13 +177,91 @@ const SportsCenterDetail: React.FC = () => {
               </div>
             </section>
 
-            {/* Galería Mockup */}
+            {/* SECCIÓN DE PROFESORES */}
+            <section className="pt-8 border-t-8 border-retro-black">
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] mb-10 flex items-center justify-between">
+                <span className="flex items-center gap-3"><span className="size-3 bg-retro-black"></span> Staff de Élite</span>
+                <span className="text-gray-400">Verificados_OS</span>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {center.instructors.map((instructor, idx) => (
+                  <div key={idx} className="bg-white border-4 border-retro-black p-6 shadow-retro-sm flex gap-6 group hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+                    <div className="size-20 md:size-24 border-4 border-retro-black grayscale group-hover:grayscale-0 transition-all overflow-hidden shrink-0">
+                      <img src={instructor.image} alt={instructor.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex flex-col justify-between min-w-0">
+                      <div>
+                        <span className="bg-retro-black text-white px-2 py-0.5 text-[8px] font-black uppercase italic mb-1 inline-block">
+                          {instructor.role}
+                        </span>
+                        <h4 className="text-sm md:text-lg font-display font-black uppercase tracking-tighter truncate leading-tight">
+                          {instructor.name}
+                        </h4>
+                      </div>
+                      <Link 
+                        to={`/instructor-profile/${encodeURIComponent(instructor.name)}`}
+                        className="text-[10px] font-black uppercase underline decoration-2 underline-offset-4 hover:bg-retro-black hover:text-white transition-colors w-fit px-1"
+                      >
+                        Ver Perfil
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Galería Snapshot */}
             <section>
-              <h2 className="text-xs font-black uppercase tracking-[0.3em] mb-8">Snapshot_Instalaciones</h2>
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                <span className="size-3 bg-retro-black"></span> Snapshot_Instalaciones
+              </h2>
               <div className="grid grid-cols-3 gap-4">
-                <div className="aspect-square border-4 border-retro-black bg-gray-200 grayscale"></div>
-                <div className="aspect-square border-4 border-retro-black bg-gray-300 halftone"></div>
-                <div className="aspect-square border-4 border-retro-black bg-gray-400 grayscale"></div>
+                <div className="aspect-square border-4 border-retro-black bg-gray-200 grayscale overflow-hidden group">
+                   <img src={`https://picsum.photos/seed/${center.id}1/400/400`} className="w-full h-full object-cover group-hover:grayscale-0 transition-all" alt="Facility 1" />
+                </div>
+                <div className="aspect-square border-4 border-retro-black bg-gray-300 halftone relative">
+                   <div className="absolute inset-0 bg-white/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="material-symbols-outlined text-4xl">add_a_photo</span>
+                   </div>
+                   <img src={`https://picsum.photos/seed/${center.id}2/400/400`} className="w-full h-full object-cover group-hover:grayscale-0 transition-all" alt="Facility 2" />
+                </div>
+                <div className="aspect-square border-4 border-retro-black bg-gray-400 grayscale overflow-hidden group">
+                   <img src={`https://picsum.photos/seed/${center.id}3/400/400`} className="w-full h-full object-cover group-hover:grayscale-0 transition-all" alt="Facility 3" />
+                </div>
+              </div>
+            </section>
+
+            {/* SECCIÓN DE REDES SOCIALES */}
+            <section className="pt-8 border-t-8 border-retro-black">
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                <span className="size-3 bg-retro-black"></span> Conexión_Social
+              </h2>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {[
+                  { key: 'instagram', icon: 'camera', label: 'INSTAGRAM', color: 'hover:bg-pink-500' },
+                  { key: 'twitter', icon: 'close', label: 'X_CORP', color: 'hover:bg-blue-400' },
+                  { key: 'facebook', icon: 'share', label: 'FACEBOOK', color: 'hover:bg-blue-600' },
+                  { key: 'tiktok', icon: 'smart_display', label: 'TIKTOK', color: 'hover:bg-retro-black' }
+                ].map((social) => {
+                  const handle = center.socials[social.key as keyof SocialLinks];
+                  if (!handle) return null;
+                  
+                  return (
+                    <a 
+                      key={social.key}
+                      href={`#${social.key}`} 
+                      className={`group border-4 border-retro-black p-6 bg-white flex flex-col items-center justify-center gap-3 shadow-retro-sm hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all ${social.color} hover:text-white`}
+                    >
+                      <span className="material-symbols-outlined text-4xl group-hover:rotate-12 transition-transform">
+                        {social.icon}
+                      </span>
+                      <div className="text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest">{social.label}</p>
+                        <p className="text-[8px] font-bold opacity-60 group-hover:opacity-100">{handle}</p>
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
             </section>
           </div>
@@ -184,7 +301,7 @@ const SportsCenterDetail: React.FC = () => {
               </div>
             </div>
 
-            {/* Newsletter / Badge */}
+            {/* Badge de Verificación */}
             <div className="border-4 border-retro-black p-6 bg-yellow-400 flex flex-col items-center justify-center text-center rotate-2 shadow-retro">
                <span className="material-symbols-outlined text-4xl mb-4">verified</span>
                <h4 className="text-lg font-display font-black uppercase leading-tight">CENTRO DE ÉLITE VERIFICADO</h4>

@@ -7,6 +7,8 @@ import LandingPage from './pages/LandingPage';
 import AthleteDashboard from './pages/AthleteDashboard';
 import InstructorPanel from './pages/InstructorPanel';
 import CourseDetail from './pages/CourseDetail';
+import CourseInfoPage from './pages/CourseInfoPage';
+import InstructorProfilePage from './pages/InstructorProfilePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import SportsCenters from './pages/SportsCenters';
@@ -105,7 +107,6 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen flex flex-col relative selection:bg-retro-black selection:text-white bg-paido-offwhite">
         <Navbar />
-        {/* pb-24 en móvil asegura que la Bottom Nav no oculte el final del contenido */}
         <main className="flex-1 pb-24 md:pb-0">
           <PageTransitionWrapper>
             <Routes>
@@ -115,6 +116,8 @@ const App: React.FC = () => {
               <Route path="/dashboard" element={<AthleteDashboard />} />
               <Route path="/instructor" element={<InstructorPanel />} />
               <Route path="/course" element={<CourseDetail />} />
+              <Route path="/course/:id" element={<CourseInfoPage />} />
+              <Route path="/instructor-profile/:name" element={<InstructorProfilePage />} />
               <Route path="/centers" element={<SportsCenters />} />
               <Route path="/centers/:id" element={<SportsCenterDetail />} />
               <Route path="/enroll/:id" element={<EnrollmentPage />} />
