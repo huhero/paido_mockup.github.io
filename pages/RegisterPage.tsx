@@ -65,7 +65,7 @@ const RegisterPage: React.FC = () => {
                   `}
                 >
                   <span className="material-symbols-outlined text-2xl mb-2">domain</span>
-                  <span className="text-[10px] font-black uppercase">Centro</span>
+                  <span className="text-[10px] font-black uppercase">Centro Deportivo</span>
                 </button>
               </div>
             </div>
