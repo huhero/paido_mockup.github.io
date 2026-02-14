@@ -1,0 +1,7 @@
+{
+  "name": "PAIDO - Neo-Brutalist Fitness Platform",
+  "description": "A high-performance fitness platform for athletes and instructors, featuring a retro-brutalist design with comprehensive dashboards, course management, and financial tracking.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

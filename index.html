@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAIDO | Fitness Ecosystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "retro-black": "#050505",
+                        "retro-white": "#ffffff",
+                        "retro-gray": "#f0f0f0",
+                        "paido-offwhite": "#f4f4f0",
+                    },
+                    fontFamily: {
+                        "display": ["Syne", "sans-serif"],
+                        "mono": ["Space Mono", "monospace"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    boxShadow: {
+                        'retro': '4px 4px 0px 0px #050505',
+                        'retro-sm': '2px 2px 0px 0px #050505',
+                        'retro-hover': '6px 6px 0px 0px #050505',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @layer utilities {
+            .halftone {
+                background-image: radial-gradient(circle, #000 1px, transparent 1.5px);
+                background-size: 4px 4px;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0"
+  }
+}
+</script>
+</head>
+<body class="bg-white text-retro-black selection:bg-retro-black selection:text-white">
+    <div id="root"></div>
+</body>
+</html>
