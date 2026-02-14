@@ -258,6 +258,29 @@ const CommunityPage: React.FC = () => {
                <input type="email" placeholder="TU@EMAIL.COM" className="w-full bg-white border-2 border-retro-black p-2 text-[10px] font-black uppercase mb-2 outline-none" />
                <button className="w-full bg-retro-black text-white py-2 text-[10px] font-black uppercase border-2 border-retro-black shadow-retro-sm active:translate-x-0.5 active:translate-y-0.5">SUSCRIBIRSE</button>
             </div>
+
+            {/* Canales Oficiales Sidebar */}
+            <div className="bg-white border-4 border-retro-black p-6 shadow-retro-sm">
+               <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6 border-b-2 border-retro-black pb-1 italic">CANALES_OFICIALES</h3>
+               <div className="grid grid-cols-2 gap-4">
+                 {[
+                   { name: 'Instagram', icon: 'camera' },
+                   { name: 'X', icon: 'close' },
+                   { name: 'LinkedIn', icon: 'share' },
+                   { name: 'YouTube', icon: 'smart_display' }
+                 ].map((social) => (
+                   <a 
+                     key={social.name} 
+                     href="#" 
+                     className="flex flex-col items-center gap-2 p-3 border-2 border-retro-black hover:bg-retro-black hover:text-white transition-all shadow-retro-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none group"
+                     title={social.name}
+                   >
+                     <span className="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">{social.icon}</span>
+                     <span className="text-[8px] font-black uppercase tracking-widest">{social.name}</span>
+                   </a>
+                 ))}
+               </div>
+            </div>
           </aside>
         </div>
       </main>

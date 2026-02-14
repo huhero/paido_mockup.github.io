@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
           <h4 className="font-black uppercase mb-6 text-xs tracking-widest border-b border-gray-800 pb-2">Ecosistema</h4>
           <ul className="space-y-4 text-sm font-bold text-gray-400 uppercase tracking-tight">
             <li><Link to="/dashboard" className="hover:text-white transition-colors underline-offset-4 hover:underline">Portal del Atleta</Link></li>
-            <li><Link to="/instructor" className="hover:text-white transition-colors underline-offset-4 hover:underline">Estudio Instructor</Link></li>
+            <li><Link to="/instructor" className="hover:text-white transition-colors underline-offset-4 hover:underline">Portal del Centro Deportivo</Link></li>
             <li><Link to="/course" className="hover:text-white transition-colors underline-offset-4 hover:underline">Catálogo Deportivo</Link></li>
           </ul>
         </div>
