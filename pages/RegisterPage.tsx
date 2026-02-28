@@ -11,6 +11,9 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Disparar efecto de carga manual
+    window.dispatchEvent(new Event('paido:start-loading'));
+
     // Simular creación de cuenta y guardado de sesión
     const mockUser = {
       name: 'NUEVO ATLETA',
@@ -20,13 +23,17 @@ const RegisterPage: React.FC = () => {
     };
     localStorage.setItem('paido_user', JSON.stringify(mockUser));
 
-    if (role === 'profesor') {
-      navigate('/instructor');
-    } else {
-      navigate('/dashboard');
-    }
     // Forzar actualización de navbar
     window.dispatchEvent(new Event('storage'));
+
+    // Pequeño retraso para que se vea el efecto antes de navegar
+    setTimeout(() => {
+      if (role === 'profesor') {
+        navigate('/instructor');
+      } else {
+        navigate('/dashboard');
+      }
+    }, 600);
   };
 
   return (

@@ -10,6 +10,9 @@ const LoginPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Disparar efecto de carga manual
+    window.dispatchEvent(new Event('paido:start-loading'));
+
     // Simular guardado de sesión
     const mockUser = {
       name: isProfesor ? 'Carlos Ramirez' : 'MATEO G. NAVARRO',
@@ -19,13 +22,17 @@ const LoginPage: React.FC = () => {
     };
     localStorage.setItem('paido_user', JSON.stringify(mockUser));
 
-    if (isProfesor) {
-      navigate('/instructor');
-    } else {
-      navigate('/dashboard');
-    }
     // Forzar actualización de navbar
     window.dispatchEvent(new Event('storage'));
+
+    // Pequeño retraso para que se vea el efecto antes de navegar
+    setTimeout(() => {
+      if (isProfesor) {
+        navigate('/instructor');
+      } else {
+        navigate('/dashboard');
+      }
+    }, 600);
   };
 
   return (

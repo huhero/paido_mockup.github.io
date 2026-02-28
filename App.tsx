@@ -34,6 +34,34 @@ const PageTransitionWrapper: React.FC<{ children: React.ReactNode }> = ({ childr
   ];
 
   useEffect(() => {
+    const handleStartLoading = () => {
+      setIsPageLoading(true);
+      setLoadingProgress(0);
+      setLoadingText(messages[Math.floor(Math.random() * messages.length)]);
+
+      const interval = setInterval(() => {
+        setLoadingProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 40);
+
+      const timer = setTimeout(() => {
+        setIsPageLoading(false);
+      }, 700);
+
+      return () => {
+        clearTimeout(timer);
+        clearInterval(interval);
+      };
+    };
+
+    window.addEventListener('paido:start-loading', handleStartLoading);
+    
+    // Trigger on route change
     setIsPageLoading(true);
     setLoadingProgress(0);
     setLoadingText(messages[Math.floor(Math.random() * messages.length)]);
@@ -55,6 +83,7 @@ const PageTransitionWrapper: React.FC<{ children: React.ReactNode }> = ({ childr
     return () => {
       clearTimeout(timer);
       clearInterval(interval);
+      window.removeEventListener('paido:start-loading', handleStartLoading);
     };
   }, [location.pathname]);
 

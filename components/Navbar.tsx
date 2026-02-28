@@ -138,6 +138,18 @@ const Navbar: React.FC = () => {
                       Ir al Tablero
                     </Link>
                     <button 
+                      onClick={() => {
+                        setIsAccessMenuOpen(false);
+                        // We can't easily trigger the state in the page from here without a global state or URL param
+                        // For now, let's just navigate to the dashboard where the settings button is prominent
+                        navigate(user.type === 'profesor' ? '/instructor' : '/dashboard');
+                      }}
+                      className="flex items-center gap-3 p-3 border-2 border-transparent hover:border-retro-black hover:bg-paido-offwhite transition-all font-black text-[10px] uppercase text-left w-full"
+                    >
+                      <span className="material-symbols-outlined text-lg">settings</span>
+                      Configuración
+                    </button>
+                    <button 
                       onClick={handleLogout}
                       className="flex items-center gap-3 p-3 border-2 border-transparent hover:border-retro-black hover:bg-red-50 text-red-600 transition-all font-black text-[10px] uppercase text-left w-full"
                     >
